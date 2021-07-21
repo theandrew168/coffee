@@ -9,3 +9,9 @@ This project's dependencies can be installed via pip:
 ```
 pip install -r requirements.txt
 ```
+
+## Running
+With the project setup, simply run `app.py`:
+```
+python3 app.py
+```
