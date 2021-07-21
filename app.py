@@ -19,5 +19,5 @@ def hello(name=None):
 if __name__ == '__main__':
     port = os.getenv('PORT') or '5000'
     addr = '127.0.0.1:{}'.format(port)
-    print('listening on {}'.format(addr))
+    print('Listening on {}'.format(addr))
     waitress.serve(app, listen=addr, url_scheme='https')
