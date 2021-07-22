@@ -1,5 +1,6 @@
 import os
 import waitress
+from random import choice
 from flask import Flask, request, render_template
 
 
@@ -7,15 +8,19 @@ app = Flask(__name__, root_path='.')
 
 @app.route('/', methods = ['GET', 'POST'])
 def index(buyer='None'):
+    potential_buyers = ['Derz', 'Wes']
     if request.method == 'POST':
-        buyer = request.form['user_name']
-        with open('buyer.txt', 'w') as f:
-            f.write(buyer)
+        if 'random' in request.form.keys():
+            current_buyer = choice(potential_buyers)
+        else:
+            current_buyer = request.form['potential_buyers']
+            with open('buyer.txt', 'w') as f:
+                f.write(current_buyer)
     else:
-        if os.path.isfile('buyer.txt'):
-            with open('buyer.txt', 'r') as f:
-                buyer = f.read()
-    return render_template('index.html', name=buyer) 
+        with open('buyer.txt', 'r') as f:
+            current_buyer = f.read()
+
+    return render_template('index.html', current_buyer=current_buyer, potential_buyers=potential_buyers) 
 
 
 if __name__ == '__main__':

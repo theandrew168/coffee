@@ -4,35 +4,37 @@
 <style>
   input:checked ~ .radio {
     color:white;
-    background-color: green;
+    background-color: #10B981;
   }
 </style>
 
 <div class="flex justify-center items-center text-center h-screen">
   <div class="m-auto">
     
-    <p class="text-xl">
+    <p class="text-4xl">
       Who is paying for coffee?
     </p> 
-    
-    <form id="form_id" class="post" action="/" method="post">
-      <div class="inline-flex rounded-lg">
-        <input type="radio" name="user_name" id="derz" value="Derz" 
-          {% if "Derz" in name %} 
-            checked 
-          {% endif %} 
-            hidden onclick="document.getElementById('form_id').submit();" />
-        <label for="derz" class="radio text-center self-center py-2 px-4 rounded-lg cursor-pointer hover:opacity-75">Derz</label>
-      </div>
-
-      <div class="inline-flex rounded-lg">
-        <input type="radio" name="user_name" id="wes"  value="Wes"
-          {% if "Wes" in name %} 
-            checked 
-          {% endif %} 
-            hidden onclick="document.getElementById('form_id').submit();" />
-        <label for="wes" class="radio text-center self-center py-2 px-4 rounded-lg cursor-pointer hover:opacity-75">Wes</label>
-      </div>
+    <div class="inline-flex rounded-lg py-1 px-1 bg-gray-100">
+      <form id="name_form_id" action="/" method="post" class="post">
+        {% for potential_buyer in potential_buyers %}
+          <div class="inline-flex rounded-lg">
+            <input type="radio" name="potential_buyers" id={{ potential_buyer }} value={{ potential_buyer }}
+              {% if potential_buyer in current_buyer %} 
+                checked 
+              {% endif %} 
+                hidden onclick="document.getElementById('name_form_id').submit();" />
+            <label for={{ potential_buyer }} class="radio text-center text-2xl self-center py-4 px-8 rounded-lg cursor-pointer hover:opacity-75">
+              {{ potential_buyer }}
+            </label>
+          </div>
+        {% endfor %}
+      </form>
+    </div>
+    <form id="random_form_id" class="post" action="/" method="post">
+      <button type="submit" name="random" id="random" value="random" 
+              class="bg-gray-500 hover:bg-g-700 text-white text-2xl font-bold py-4 px-8 rounded focus:outline-none focus:shadow-outline">
+        Random
+      </button>
     </form>
   </div>
 </div>
