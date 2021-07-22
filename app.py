@@ -1,19 +1,18 @@
 import os
 
-from flask import Flask, render_template
+from flask import Flask, request, render_template
 import waitress
 
 
 app = Flask(__name__, root_path='.')
 
-@app.route('/')
-def index():
-    return 'Hello world from flask!'
 
-@app.route('/hello/')
-@app.route('/hello/<name>')
-def hello(name=None):
-    return render_template('hello.html', name=name)
+@app.route('/', methods = ['GET', 'POST'])
+def index(buyer='None'):
+    if request.method == 'POST':
+        buyer = request.form['user_name']
+
+    return render_template('index.html', name=buyer) 
 
 
 if __name__ == '__main__':
