@@ -6,7 +6,6 @@ from flask import Flask, request, render_template, redirect
 
 app = Flask(__name__, root_path='.')
 
-
 @app.route('/', methods = ['GET', 'POST'])
 def index():
     current_buyer = None
