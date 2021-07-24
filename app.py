@@ -22,7 +22,9 @@ def index():
         if os.path.isfile('buyer.txt'):
             with open('buyer.txt', 'r') as f:
                 current_buyer = f.read()
-
+        else:
+            with open('buyer.txt', 'w') as f:
+                f.write('None')
     return render_template('index.html', current_buyer=current_buyer, potential_buyers=potential_buyers) 
 
 
