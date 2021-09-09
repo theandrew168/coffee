@@ -24,12 +24,12 @@ jobs:
         npm install -g purgecss
     # intentionally absent from the Makefile due to destructive behavior
     - name: Strip unused CSS
-      run: |
-        purgecss -c scripts/purgecss.config.js -con templates/*.html -css static/css/* -o static/css/
-#    - name: Run tests
-#      run: |
-#        pip install pytest
-#        make test
+      run: >
+        purgecss
+        -c scripts/purgecss.config.js
+        -con templates/*.html
+        -css static/css/*
+        -o static/css/
     - name: Build project
       run: |
         make dist
@@ -49,4 +49,4 @@ jobs:
         username: ${{ secrets.COFFEE_SSH_USER }}
         key: ${{ secrets.COFFEE_SSH_KEY }}
         script: |
-          sudo systemctl restart coffee-web
+          sudo systemctl restart coffee
